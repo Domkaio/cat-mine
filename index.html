@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cat Mine</title>
+<meta name="description" content="Cat Mine — campo minado felino nos telhados à meia-noite.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Manrope:wght@400;600;700;800&family=Unbounded:wght@700;800;900&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-paw" viewBox="0 0 64 64"><ellipse cx="32" cy="42" rx="14" ry="12"/><ellipse cx="14" cy="27" rx="6" ry="8" transform="rotate(-20 14 27)"/><ellipse cx="25" cy="16" rx="6" ry="8.5" transform="rotate(-6 25 16)"/><ellipse cx="39" cy="16" rx="6" ry="8.5" transform="rotate(6 39 16)"/><ellipse cx="50" cy="27" rx="6" ry="8" transform="rotate(20 50 27)"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2h6"/></symbol>
+    <symbol id="i-back" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></symbol>
+    <symbol id="i-sound" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></symbol>
+    <symbol id="i-music" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><path d="M12 8.5c1 1.2 1 5.8 0 7-1-1.2-1-5.8 0-7z" fill="currentColor"/></symbol>
+    <symbol id="i-redo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v7h-7"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15a1 1 0 0 0 1.5.9l12-7.5a1 1 0 0 0 0-1.7l-12-7.5A1 1 0 0 0 7 4.5z"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/><circle cx="12" cy="15.5" r="1.6" fill="currentColor"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-9.3-9.2C1.4 7.4 3.7 4 7.2 4c2 0 3.5 1.1 4.8 2.9C13.3 5.1 14.8 4 16.8 4c3.5 0 5.8 3.4 4.5 6.8C19.5 15.4 12 20 12 20z"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2" fill="currentColor"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></symbol>
+    <symbol id="i-medal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><circle cx="12" cy="15" r="6"/><path d="M8 3l2.5 6.5M16 3l-2.5 6.5M12 12.5l.9 1.8 2 .3-1.4 1.4.3 2-1.8-1-1.8 1 .3-2-1.4-1.4 2-.3z"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></symbol>
+  </defs>
+</svg>
+
+<div id="cur-dot"></div>
+<div id="cur-ring"><svg viewBox="0 0 64 64"><use href="#i-paw"/></svg></div>
+
+<div class="sky" aria-hidden="true">
+  <canvas id="stars"></canvas>
+  <div class="moon" id="moon"></div>
+  <div class="clouds" id="clouds"></div>
+  <canvas class="city" id="city-far"></canvas>
+  <canvas class="city" id="city-near"></canvas>
+  <div class="haze"></div>
+</div>
+<canvas id="fx" aria-hidden="true"></canvas>
+<div class="flash" id="flash"></div>
+
+<div class="landing" id="landing">
+  <nav class="nav" id="nav">
+    <a class="brand" href="#topo" data-hover><img src="assets/logo.webp" alt="">CAT MINE</a>
+    <div class="nav-links">
+      <a href="#modos" class="hide-sm" data-hover>Modos</a>
+      <a href="#como" class="hide-sm" data-hover>Como jogar</a>
+      <a href="#conquistas" class="hide-sm" data-hover>Conquistas</a>
+      <button class="btn btn-primary btn-sm" data-play data-hover><svg><use href="#i-play"/></svg>Jogar</button>
+    </div>
+  </nav>
+
+  <header class="hero" id="topo">
+    <div class="hero-copy">
+      <span class="eyebrow"><i class="dot"></i>Ronda noturna<span class="more">&nbsp;· telhados de Felisnoc</span></span>
+      <h1 class="title" aria-label="Cat Mine">
+        <span class="row"><span class="solid">CAT</span></span>
+        <span class="row"><span class="outline">MINE</span></span>
+      </h1>
+      <p class="lede">Um gato preto, nove vidas e um telhado cheio de minas. <strong>Leia os números, marque com a patinha</strong> e atravesse a noite sem acordar a vizinhança.</p>
+      <div class="cta-row">
+        <button class="btn btn-primary btn-xl" data-play data-hover><svg><use href="#i-play"/></svg>Jogar agora</button>
+        <button class="btn btn-ghost btn-xl" id="dailyBtn" data-hover><svg><use href="#i-cal"/></svg><span id="dailyLabel">Desafio diário</span></button>
+      </div>
+      <div class="facts">
+        <div class="fact"><b>5</b><span>modos</span></div>
+        <div class="fact"><b>4</b><span>dificuldades</span></div>
+        <div class="fact"><b>9</b><span>vidas</span></div>
+        <div class="fact"><b id="factAch">0/9</b><span>conquistas</span></div>
+      </div>
+    </div>
+    <div class="hero-stage" id="heroStage">
+      <div class="orbit"><i></i></div>
+      <div class="orbit o2"><i></i></div>
+      <div class="hero-cat" id="heroCat">
+        <div class="catlogo">
+          <img src="assets/logo.webp" alt="Logo do Cat Mine: cabeça de gato preto com olhos brilhantes e cicatriz em estrela">
+          <div class="eyes eyes-glow"></div>
+          <div class="eyes"></div>
+        </div>
+      </div>
+      <div class="float-tile t1" data-depth="1.6">1</div>
+      <div class="float-tile t2" data-depth="2.2">3</div>
+      <div class="float-tile t3" data-depth="1.2"><svg viewBox="0 0 64 64"><use href="#i-paw"/></svg></div>
+      <div class="float-tile t4" data-depth="2.6">2</div>
+    </div>
+    <div class="scroll-hint"><i></i>role</div>
+  </header>
+
+  <section class="section" id="modos">
+    <div class="sec-head reveal">
+      <div>
+        <p class="sec-kicker">Escolha sua ronda</p>
+        <h2 class="sec-title">Modos de jogo</h2>
+      </div>
+      <p class="sec-sub">Cada modo muda as regras da noite. Combine com a dificuldade e tente bater seu recorde.</p>
+    </div>
+    <div class="modes reveal" id="modes"></div>
+    <div class="launch reveal">
+      <div>
+        <div class="launch-label">Dificuldade</div>
+        <div class="diffs" id="diffs"></div>
+        <div class="custom" id="custom">
+          <label for="cw">Colunas <output id="cwo">20</output><input type="range" id="cw" min="6" max="30" value="20"></label>
+          <label for="ch">Linhas <output id="cho">14</output><input type="range" id="ch" min="6" max="24" value="14"></label>
+          <label for="cm">Minas <output id="cmo">45</output><input type="range" id="cm" min="4" max="200" value="45"></label>
+        </div>
+      </div>
+      <div class="launch-side">
+        <div class="best" id="bestLine">Sem recorde ainda</div>
+        <button class="btn btn-primary btn-xl" id="startBtn" data-hover><svg><use href="#i-play"/></svg>Começar ronda</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="como">
+    <div class="sec-head reveal">
+      <div>
+        <p class="sec-kicker">Instinto felino</p>
+        <h2 class="sec-title">Como jogar</h2>
+      </div>
+      <p class="sec-sub">O primeiro clique é sempre seguro. Depois disso, confie nos números.</p>
+    </div>
+    <div class="how reveal">
+      <div class="how-card">
+        <div class="demo" id="demo1"></div>
+        <h3>Revele os telhados</h3>
+        <p>Clique numa telha para abri-la. Áreas vazias se abrem em cascata até encontrar números.</p>
+      </div>
+      <div class="how-card">
+        <div class="demo" id="demo2"></div>
+        <h3>Leia os números</h3>
+        <p>Cada número diz quantas minas tocam aquela telha, inclusive nas diagonais.</p>
+      </div>
+      <div class="how-card">
+        <div class="demo" id="demo3"></div>
+        <h3>Marque com a patinha</h3>
+        <p><kbd>Botão direito</kbd> ou <kbd>segurar</kbd> no celular marca uma mina. Clique num número já cercado de patinhas para abrir tudo em volta.</p>
+      </div>
+      <div class="how-card">
+        <div class="demo" id="demo4"></div>
+        <h3>Visão Felina</h3>
+        <p>Travou? Use a <kbd>Visão Felina</kbd> para abrir uma telha segura. São 3 por ronda e cada uma custa pontos.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="conquistas">
+    <div class="sec-head reveal">
+      <div>
+        <p class="sec-kicker">Sala de troféus</p>
+        <h2 class="sec-title">Conquistas</h2>
+      </div>
+      <p class="sec-sub">Ficam salvas neste navegador. Desbloqueie todas para virar a lenda dos telhados.</p>
+    </div>
+    <div class="ach-wrap reveal">
+      <div class="achs" id="achs"></div>
+      <div class="stats" id="stats"></div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <img src="assets/logo.webp" alt="">
+    Cat Mine · feito em HTML, CSS e JavaScript · nenhum gato foi explodido
+  </footer>
+</div>
+
+<div class="dark-mask" id="darkMask" hidden></div>
+<div class="game" id="game" hidden>
+  <div class="hud">
+    <div class="hud-left">
+      <button class="icon-btn" id="backBtn" aria-label="Voltar ao menu" data-hover><svg><use href="#i-back"/></svg></button>
+      <div class="mode-label"><b id="hudMode">Clássico</b><small id="hudDiff">Gato de Rua · 16×16</small></div>
+    </div>
+    <div class="hud-center">
+      <div class="gauge mines"><svg viewBox="0 0 64 64"><use href="#i-paw"/></svg><div><span class="g-lab">Minas</span><span class="g-val" id="minesLeft">40</span></div></div>
+      <button class="cat-btn" id="catBtn" aria-label="Reiniciar ronda" data-hover>
+        <span class="catlogo"><img src="assets/logo.webp" alt=""><span class="eyes"></span></span>
+      </button>
+      <div class="gauge time" id="timeGauge"><svg><use href="#i-clock"/></svg><div><span class="g-lab" id="timeLab">Tempo</span><span class="g-val" id="timeVal">00:00</span></div></div>
+    </div>
+    <div class="hud-right">
+      <span class="combo" id="combo">x2</span>
+      <div class="score-box"><span class="g-lab">Pontos</span><div class="g-val" id="scoreVal">0</div></div>
+    </div>
+    <div class="lives" id="lives" hidden></div>
+  </div>
+  <div class="board-wrap" id="boardWrap">
+    <div class="board" id="board" role="grid" aria-label="Tabuleiro"></div>
+  </div>
+  <div class="dock">
+    <button class="chip-btn" id="flagBtn" data-hover aria-pressed="false"><svg viewBox="0 0 64 64" fill="currentColor"><use href="#i-paw"/></svg><span id="flagLab">Modo patinha</span></button>
+    <button class="chip-btn" id="hintBtn" data-hover><svg><use href="#i-eye"/></svg>Visão Felina <span class="count" id="hintCount">3</span></button>
+    <button class="icon-btn" id="soundBtn" aria-label="Som" data-hover><svg><use href="#i-sound"/></svg></button>
+    <button class="icon-btn" id="musicBtn" aria-label="Música" data-hover><svg><use href="#i-music"/></svg></button>
+    <button class="icon-btn" id="redoBtn" aria-label="Nova ronda" data-hover><svg><use href="#i-redo"/></svg></button>
+    <span class="keys">R reinicia · F marca · H dica · setas movem</span>
+  </div>
+</div>
+
+<div class="modal" id="endModal" hidden>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="endTitle">
+    <div class="catlogo" id="endCat"><img src="assets/logo.webp" alt=""><span class="eyes"></span></div>
+    <div id="newBest"></div>
+    <h2 id="endTitle">Território conquistado</h2>
+    <p id="endText"></p>
+    <div class="res-grid" id="endGrid"></div>
+    <div class="modal-actions">
+      <button class="btn btn-primary" id="againBtn" data-hover><svg><use href="#i-redo"/></svg>Jogar de novo</button>
+      <button class="btn btn-ghost" id="menuBtn" data-hover>Menu</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="confirmModal" hidden>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="confTitle">
+    <h2 id="confTitle">Abandonar a ronda?</h2>
+    <p>O progresso desta partida será perdido.</p>
+    <div class="modal-actions">
+      <button class="btn btn-primary" id="confYes" data-hover>Sair</button>
+      <button class="btn btn-ghost" id="confNo" data-hover>Continuar jogando</button>
+    </div>
+  </div>
+</div>
+
+<div class="toasts" id="toasts" aria-live="polite"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
