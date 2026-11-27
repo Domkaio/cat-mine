@@ -27,6 +27,8 @@
     <symbol id="i-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2" fill="currentColor"/></symbol>
     <symbol id="i-bolt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></symbol>
     <symbol id="i-medal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><circle cx="12" cy="15" r="6"/><path d="M8 3l2.5 6.5M16 3l-2.5 6.5M12 12.5l.9 1.8 2 .3-1.4 1.4.3 2-1.8-1-1.8 1 .3-2-1.4-1.4 2-.3z"/></symbol>
+    <symbol id="i-sliders" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h9M19 7h1M4 17h3M13 17h7"/><circle cx="16" cy="7" r="2.4"/><circle cx="10" cy="17" r="2.4"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></symbol>
     <symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></symbol>
   </defs>
 </svg>
@@ -52,13 +54,13 @@
       <a href="#modos" class="hide-sm" data-hover>Modos</a>
       <a href="#como" class="hide-sm" data-hover>Como jogar</a>
       <a href="#conquistas" class="hide-sm" data-hover>Conquistas</a>
+      <button class="nav-link" id="settingsBtn" data-hover aria-haspopup="dialog"><svg><use href="#i-sliders"/></svg><span class="lbl">Configurações</span></button>
       <button class="btn btn-primary btn-sm" data-play data-hover><svg><use href="#i-play"/></svg>Jogar</button>
     </div>
   </nav>
 
   <header class="hero" id="topo">
     <div class="hero-copy">
-      <span class="eyebrow"><i class="dot"></i>Ronda noturna<span class="more">&nbsp;· telhados de Felisnoc</span></span>
       <h1 class="title" aria-label="Cat Mine">
         <span class="row"><span class="solid">CAT</span></span>
         <span class="row"><span class="outline">MINE</span></span>
@@ -201,6 +203,32 @@
     <button class="icon-btn" id="musicBtn" aria-label="Música" data-hover><svg><use href="#i-music"/></svg></button>
     <button class="icon-btn" id="redoBtn" aria-label="Nova ronda" data-hover><svg><use href="#i-redo"/></svg></button>
     <span class="keys">R reinicia · F marca · H dica · setas movem</span>
+  </div>
+</div>
+
+<div class="modal" id="settingsModal" hidden>
+  <div class="modal-card settings-card" role="dialog" aria-modal="true" aria-labelledby="setTitle">
+    <button class="icon-btn set-close" id="setClose" aria-label="Fechar configurações" data-hover><svg><use href="#i-close"/></svg></button>
+    <h2 id="setTitle">Configurações</h2>
+    <p>Ficam salvas neste navegador.</p>
+    <div class="set-list">
+      <div class="set-row">
+        <div class="set-txt"><b id="lblSfx">Efeitos sonoros</b><small>Cliques, telhas e miados</small></div>
+        <button class="switch" id="setSfx" role="switch" aria-checked="true" aria-labelledby="lblSfx" data-hover></button>
+      </div>
+      <div class="set-row">
+        <div class="set-txt"><b id="lblMusic">Música ambiente</b><small>Trilha suave da ronda noturna</small></div>
+        <button class="switch" id="setMusic" role="switch" aria-checked="false" aria-labelledby="lblMusic" data-hover></button>
+      </div>
+      <div class="set-row" id="rowCursor">
+        <div class="set-txt"><b id="lblCursor">Cursor de patinha</b><small>Desligue para usar o cursor normal</small></div>
+        <button class="switch" id="setCursor" role="switch" aria-checked="true" aria-labelledby="lblCursor" data-hover></button>
+      </div>
+    </div>
+    <div class="set-danger">
+      <div class="set-txt"><b>Apagar progresso</b><small>Remove recordes, conquistas e estatísticas</small></div>
+      <button class="btn btn-ghost btn-sm" id="setReset" data-hover>Apagar</button>
+    </div>
   </div>
 </div>
 

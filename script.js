@@ -296,7 +296,7 @@ function floater(x, y, text, cls = '') {
 const curDot = $('#cur-dot'), curRing = $('#cur-ring');
 let cx = W / 2, cy = H / 2, rx = cx, ry = cy, lastTrail = 0;
 if (finePointer) {
-  document.body.classList.add('custom-cursor');
+  if (store.get('cursor', true)) document.body.classList.add('custom-cursor'); else document.body.classList.add('cur-off');
   addEventListener('pointermove', e => {
     if (e.pointerType !== 'mouse') return;
     cx = e.clientX; cy = e.clientY;
@@ -979,8 +979,8 @@ function tryLeave() {
 }
 
 $$('[data-play]').forEach(b => b.addEventListener('click', () => {
-  if (b.closest('.nav')) { $('#modos').scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' }); Sound.init(); Sound.click(); }
-  else openGame();
+  $('#modos').scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' });
+  Sound.init(); Sound.click();
 }));
 $('#startBtn').addEventListener('click', openGame);
 $('#dailyBtn').addEventListener('click', () => { sel.mode = 'daily'; store.set('sel', sel); renderModes(); renderDiffs(); updateBest(); openGame(); });
@@ -993,7 +993,7 @@ $('#confYes').addEventListener('click', closeGame);
 $('#confNo').addEventListener('click', () => { $('#confirmModal').hidden = true; });
 $('#flagBtn').addEventListener('click', () => { setFlagMode(!flagMode); Sound.click(); });
 $('#hintBtn').addEventListener('click', hint);
-function syncAudioBtns() { $('#soundBtn').classList.toggle('off', !Sound.sfx); $('#musicBtn').classList.toggle('off', !Sound.music); $('#soundBtn').setAttribute('aria-pressed', Sound.sfx); $('#musicBtn').setAttribute('aria-pressed', Sound.music); }
+function syncAudioBtns() { syncSettings(); $('#soundBtn').classList.toggle('off', !Sound.sfx); $('#musicBtn').classList.toggle('off', !Sound.music); $('#soundBtn').setAttribute('aria-pressed', Sound.sfx); $('#musicBtn').setAttribute('aria-pressed', Sound.music); }
 $('#soundBtn').addEventListener('click', () => { Sound.toggleSfx(); syncAudioBtns(); });
 $('#musicBtn').addEventListener('click', () => { Sound.toggleMusic(); syncAudioBtns(); });
 document.addEventListener('mouseover', e => { const b = e.target.closest && e.target.closest('.btn, .icon-btn, .chip-btn'); if (b && !b.contains(e.relatedTarget)) Sound.hover(); });
@@ -1034,6 +1034,44 @@ function onResize() {
   sizeFx(); buildStars(); buildCity(); if (!gameOpen) positionMoon(); fitBoard();
 }
 addEventListener('resize', () => { clearTimeout(rzT); rzT = setTimeout(onResize, 120); });
+
+/* =========================================================
+   Configurações
+   ========================================================= */
+const setModal = $('#settingsModal'), setBtn = $('#settingsBtn'), resetBtn = $('#setReset');
+let resetTimer = null;
+function syncSettings() {
+  $('#setSfx').setAttribute('aria-checked', Sound.sfx);
+  $('#setMusic').setAttribute('aria-checked', Sound.music);
+  $('#setCursor').setAttribute('aria-checked', !document.body.classList.contains('cur-off'));
+}
+function disarmReset() { clearTimeout(resetTimer); resetBtn.classList.remove('armed'); resetBtn.textContent = 'Apagar'; }
+function openSettings() { syncSettings(); setModal.hidden = false; document.body.classList.add('lock'); $('#setClose').focus(); Sound.init(); Sound.click(); }
+function closeSettings() { if (setModal.hidden) return; setModal.hidden = true; document.body.classList.remove('lock'); disarmReset(); setBtn.focus(); }
+setBtn.addEventListener('click', openSettings);
+$('#setClose').addEventListener('click', closeSettings);
+setModal.addEventListener('pointerdown', e => { if (e.target === setModal) closeSettings(); });
+addEventListener('keydown', e => { if (e.key === 'Escape' && !setModal.hidden) closeSettings(); });
+$('#setSfx').addEventListener('click', () => { Sound.toggleSfx(); syncAudioBtns(); Sound.click(); });
+$('#setMusic').addEventListener('click', () => { Sound.toggleMusic(); syncAudioBtns(); });
+if (!finePointer) $('#rowCursor').hidden = true;
+$('#setCursor').addEventListener('click', () => {
+  const on = document.body.classList.contains('cur-off');
+  document.body.classList.toggle('cur-off', !on);
+  document.body.classList.toggle('custom-cursor', on);
+  store.set('cursor', on); syncSettings(); Sound.click();
+});
+resetBtn.addEventListener('click', () => {
+  if (!resetBtn.classList.contains('armed')) {
+    resetBtn.classList.add('armed'); resetBtn.textContent = 'Confirmar?';
+    resetTimer = setTimeout(disarmReset, 4000); return;
+  }
+  const keep = ['sfx', 'music', 'cursor'];
+  try {
+    Object.keys(localStorage).filter(k => k.startsWith('catmine:') && !keep.includes(k.slice(8))).forEach(k => localStorage.removeItem(k));
+  } catch {}
+  location.reload();
+});
 
 /* ---------- Início ---------- */
 renderModes(); renderDiffs(); setupCustom(); updateBest(); renderAchs(); syncDaily(); syncAudioBtns();
